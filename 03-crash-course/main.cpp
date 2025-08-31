@@ -1,3 +1,4 @@
+#include <optional>
 #include <print>
 #include <iostream>
 #include <string>
@@ -6,6 +7,14 @@
 // see section 6 of main()
 auto multiply(int a, double b) {
     return a*b;
+}
+
+// see section 8 of main()
+std::optional<int> returnBigOdd(int a) {
+    if(a%2 == 1 && a > 1000)
+        return a;
+    else
+        return std::nullopt;
 }
 
 int main() {
@@ -96,5 +105,9 @@ int main() {
     }
     std::println("\nEnd!");
 
-    // 8. optionals
+    // 8. optionals - bit like a maybe in haskell
+    auto numOptional = returnBigOdd(198765);
+    if(numOptional.has_value()) {
+        std::println("The number {} is big and odd.", numOptional.value());
+    }
 }
