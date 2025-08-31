@@ -134,7 +134,7 @@ int main() {
 
     // 10. classes/structs and objects
     class House {
-        private:
+        protected:
             int price;
             int height;
             int numOfDoors;
@@ -142,10 +142,10 @@ int main() {
             House(int price, int height, int numOfDoors)
                 :price{price}, height{height}, numOfDoors{numOfDoors}
             {
-                std::print("Another great house built by AmazeBuild!");
+                std::println("Another great house built by AmazeBuild!");
             }
 
-            void printInfo() const {
+            virtual void printInfo() const {
                 std::println("Price: {}\nHeight: {}\nDoors: {}", price, height, numOfDoors);
             }
     };
@@ -154,4 +154,35 @@ int main() {
     myHome.printInfo();
 
     // 11. inheritance
+    class SpecialHouse : public House {
+        public:
+            SpecialHouse(int mult) : House(300000*mult, 10*mult, 10*mult) {
+                std::println("This one is a speshul house!");
+            }
+
+            void jump(int jumpHt) {
+                std::println("The house jumped {}m in the air!", jumpHt);
+            }
+            void valInc(int amount) {
+                price += amount;
+            }
+            void printInfo() const override {
+                std::println("Price: ${}\nHeight: {}m\nDouble-Doors: {}", price, height, numOfDoors);
+            }
+    };
+
+    SpecialHouse superHome(100);
+    superHome.printInfo();
+    superHome.jump(10);
+    superHome.valInc(1000000);
+    superHome.printInfo();
+
+    //the overridden func on line 169 means we can do the following:
+    House* housePtr;
+    if(not g)
+        housePtr = &myHome;
+    else
+        housePtr = &superHome;
+    std::println("The pointer-derived info:");
+    housePtr->printInfo();
 }
