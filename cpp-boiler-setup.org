@@ -1,0 +1,97 @@
+* Prerequisites
+ - sudo pacman -S code clang cmake
+ - install extensions in code - clangd (llvm-vs-code-extensions), cmake tools (ms-vscode), cmake-format (cheshirekow) - cmake is no longer needed allegedly.
+* Simple compile
+ - you can compile a hello-world.cpp with =clang++ - main.cp -o -std=c++23 hello=
+* cmake
+Write your CMakeLists.txt file, in the same dir as your main.cpp. This *won't* make with =cmake -S . -B build= because it can't find the relevant compiler variables etc for the project yet.
+#+begin_src cmake
+cmake_minimum_required(VERSION 4.1) //take the major.minor from cmake --version
+project(hello_world) # whatever you want
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED 23)
+
+add_executable(hello
+    main.cpp
+)
+#+end_src
+* Project
+** json file
+Write a CMakePresets.json file. version 8 works, I don't know why. vscode helps with selecting valid values for the keys. 
+#+begin_src json
+{
+    "version": 8,
+    "cmakeMinimumRequired": {
+        "major": 4,
+        "minor": 1,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "default",
+            "description": "Clang++ and Ninja",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": true
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "configurePreset": "default"
+        }
+    ]
+}
+#+end_src
+** project creation
+=cmake --preset default=
+* build your project
+=`cmake --build build/=
+
+* using modules
+in mid-2025, import std; still doesn't work (at least not in linux, using gcc or clang, with clion, vscode or emacs
+so you have to mix modules and #include - put the #include in the module file my_module.cpp:
+
+#+begin_src cpp
+  module;
+  // module fragment - where we can put includes
+  #include <print>
+
+  export module my_module;
+
+  export void greets() {
+    std::println("Hello from a module");
+  }
+#+end_src
+
+#+begin_src cpp
+  import my_module;
+
+  
+  int main() {
+      greets();
+  }
+#+end_src
+The CMakeLists.txt needs to be amended. The json file is unchanged.
+#+begin_src cmake
+cmake_minimum_required(VERSION 4.1) #take the major.minor from cmake --version
+project(hello_world) # whatever you want
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED 23)
+
+add_executable(hello)
+target_sources(hello PRIVATE
+    main.cpp
+PRIVATE
+FILE_SET CXX_MODULES
+FILES
+    my_module.cpp
+)
+#+end_src
