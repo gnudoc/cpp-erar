@@ -1,9 +1,12 @@
+#include <exception>
 #include <memory>
 #include <optional>
 #include <print>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 // see section 6 of main()
 auto multiply(int a, double b) {
@@ -185,4 +188,27 @@ int main() {
         housePtr = &superHome;
     std::println("The pointer-derived info:");
     housePtr->printInfo();
+
+
+    //12. Standard Template Library algorithms
+    std::vector<int> anotherVector{ 3,1,4,1,5,9,2,6,5,4 };
+    std::sort(anotherVector.begin(),anotherVector.end());
+
+    for(int num : anotherVector) {
+        std::print("{} ", num);
+    }
+    std::println("Vector got sorted!");
+
+    //13. try and catch
+    try {
+        // do some stuff
+        if(true) {
+            throw std::runtime_error("useful message about the exception.");
+        }
+        std::println("This will not get printed because an error got thrown.");
+    } catch (const std::exception& e) {
+        std::cerr << "Caught an exception: " << e.what() << std::endl;
+    } catch (...) {
+        std::cerr << "Something bad happened, don't know what.";
+    }
 }
