@@ -43,5 +43,8 @@
 # emacs backup files
 *~
 
-# no need to commit build directories
+# build directories
 build/
+
+# cache directories
+.cache/
