@@ -1,3 +1,4 @@
+#include <memory>
 #include <optional>
 #include <print>
 #include <iostream>
@@ -110,4 +111,47 @@ int main() {
     if(numOptional.has_value()) {
         std::println("The number {} is big and odd.", numOptional.value());
     }
+
+
+    // 9. references
+
+    int omega {7};
+    int& omegaRef {omega};
+    omegaRef = 8;
+    std::println("Value of omega: {}", omega);
+    std::println("Value of omegaRef: {}", omegaRef);
+
+    // 10. raw pointers and smart pointers
+    int* raw_ptr{&omega}; // rarely needed; should never hold ownership of data
+    std::println("Value of omega: {}", *raw_ptr);
+    //std::println("Value of the pointer: {}", ptr); //this doesn't compile
+    //doesn't clean up after itself
+
+    std::unique_ptr<int> smartPtr{ std::make_unique<int>(10) }; //use this if need to use pointers
+    std::println("Value of the smart pointer: {}", *smartPtr);
+    //cleans up after itself once out of scope
+
+
+    // 10. classes/structs and objects
+    class House {
+        private:
+            int price;
+            int height;
+            int numOfDoors;
+        public:
+            House(int price, int height, int numOfDoors)
+                :price{price}, height{height}, numOfDoors{numOfDoors}
+            {
+                std::print("Another great house built by AmazeBuild!");
+            }
+
+            void printInfo() const {
+                std::println("Price: {}\nHeight: {}\nDoors: {}", price, height, numOfDoors);
+            }
+    };
+
+    House myHome(10000,10,2);
+    myHome.printInfo();
+
+    // 11. inheritance
 }
