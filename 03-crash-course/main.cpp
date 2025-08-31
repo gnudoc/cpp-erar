@@ -31,7 +31,7 @@ int main() {
     int userInput;
     std::cin >> userInput;
     const int i { h * userInput }; // this one can't be so we use a const
-    std::cout << i;
+    std::cout << i << std::endl;
 
     // 4. control structures
     if(not g) {
@@ -43,4 +43,9 @@ int main() {
     }
 
     // 5. loops
+    
+    for(int j{0}; j<10; j++) {
+        //code
+        std::cout << j << std::endl;
+    }
 }
