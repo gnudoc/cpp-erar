@@ -1,4 +1,5 @@
 #include <exception>
+#include <fstream>
 #include <memory>
 #include <optional>
 #include <print>
@@ -211,4 +212,25 @@ int main() {
     } catch (...) {
         std::cerr << "Something bad happened, don't know what.";
     }
+
+    //14. auto
+    [[maybe_unused]]
+    auto test1 = 7;
+    [[maybe_unused]]
+    auto test2 = "Do what I mean";
+    auto test3 = std::string("Do what I mean");
+    const auto& test4 = std::string("This won't change.");
+
+    //15. file i/o
+    std::ofstream file("example.txt");
+    file << "Line 1" << std::endl;
+    file << "Line 2" << std::endl;
+    file.close();
+
+    std::ifstream inputFile("example.txt");
+    std::string line;
+    while(std::getline(inputFile,line)) {
+        std::println("[READ]: {}", line);
+    }
+
 }
