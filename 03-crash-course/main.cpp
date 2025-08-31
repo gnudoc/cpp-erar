@@ -1,6 +1,7 @@
 #include <print>
 #include <iostream>
 #include <string>
+#include <vector>
 
 // see section 6 of main()
 auto multiply(int a, double b) {
@@ -78,4 +79,22 @@ int main() {
     int res = add(7,21);
     std::println("Res of lambda is {}.", res);//note can't just println an int
 
+
+    // 7. arrays & vectors
+    int numArray[5] {1, 2, 3, 4, 5}; //old arrays
+    numArray[2] = 200; // possible out-of-bounds array usage
+    
+    std::array<int,5> modernArray {1,2,3,4,5}; //new & fancy
+    modernArray[2] = 500; // possible out-of-bounds array usage
+    modernArray.at(2) = 700; //does a bounds check
+
+    std::vector<int> numVector {1,2,3,4,5};
+    numVector.push_back(6); // vectors can grow dynamically!
+
+    for(auto elem : numVector) { // can do w modern arrays too
+        std::print("{} ", elem);
+    }
+    std::println("\nEnd!");
+
+    // 8. optionals
 }
