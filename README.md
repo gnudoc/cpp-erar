@@ -1,2 +1,2 @@
 # cpp-erar
-following along with erarnitox's youtube playlist of c++ on linux 2025
+following along with erarnitox's youtube playlist https://youtu.be/2O3r5qqjyiY of c++ on linux 2025. Unusually, it seems to be written by someone that's actually a linux person and a C++ person. It shows the setup of the toolchain from scratch, not relying on a specific IDE's internal tools (though he uses the OSS version VSCODE on manjaro, without any official marketplace or MS tools).
