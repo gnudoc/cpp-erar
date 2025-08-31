@@ -1,9 +1,11 @@
 #include <exception>
 #include <fstream>
+#include <map>
 #include <memory>
 #include <optional>
 #include <print>
 #include <iostream>
+#include <set>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -233,4 +235,23 @@ int main() {
         std::println("[READ]: {}", line);
     }
 
+    //16. maps
+    std::map<std::string, int> ageMap {
+        {"Adam", 1},
+        {"Bob", 3},
+        {"Chuck", 3},
+        {"Dave", 5}
+    };
+    auto key = "Bob";
+    std::println("{} is {} years old.", key, ageMap[key]);
+
+    //17. sets
+    std::set uniqueNums {3,1,4,1,5,9,2,6,5,4};
+    std::println("The set:");
+    for (int num : uniqueNums) {
+        std::print("{} ",num);
+    }
+
+    // 18. tuples
+    
 }
