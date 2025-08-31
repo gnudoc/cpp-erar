@@ -8,11 +8,11 @@ int main() {
     std::cout << "This is from a cout." << std::endl;
 
     // 2. Vars and Types
-    [[maybe_unused]] //removes the warning
+    
     int a{ 42 }; // good to assign with an assignment list instead of just =
-    [[maybe_unused]]
+    
     int b{ a + 7 };
-    [[maybe_unused]]
+    
     float c{ 3.14f };
     [[maybe_unused]]
     double d { b * c };
@@ -42,10 +42,24 @@ int main() {
         std::cout << "something else happened." << std::endl;
     }
 
+    //also case-switch
+
     // 5. loops
     
     for(int j{0}; j<10; j++) {
         //code
         std::cout << j << std::endl;
     }
+
+    while(g) {
+        std::cout << "loopy" << std::endl;
+        b++;
+        if (b>55) {
+            g = false;
+        }
+    }
+
+    //also do-while
+
+    
 }
