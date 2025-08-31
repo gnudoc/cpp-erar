@@ -2,6 +2,11 @@
 #include <iostream>
 #include <string>
 
+// see section 6 of main()
+auto multiply(int a, double b) {
+    return a*b;
+}
+
 int main() {
     // 1. Basic console I/O
     std::println("Hello {} World!", "This is from a print command.");
@@ -14,7 +19,7 @@ int main() {
     int b{ a + 7 };
     
     float c{ 3.14f };
-    [[maybe_unused]]
+    
     double d { b * c };
     //(void)d; //void cast also removes 'unused' warning.
     
@@ -61,5 +66,16 @@ int main() {
 
     //also do-while
 
-    
+    // 6. functions
+    // see the top of the file for this one
+    double result = multiply(a,d);
+    std::cout << result << std::endl;
+
+    //this one is a lambda
+    auto add = [](int x, int y) -> int {
+        return x + y;
+    };
+    int res = add(7,21);
+    std::println("Res of lambda is {}.", res);//note can't just println an int
+
 }
