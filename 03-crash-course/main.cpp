@@ -11,6 +11,13 @@
 #include <vector>
 #include <algorithm>
 
+// see section 20 of main()
+namespace myNamespace {
+    int multi(int a, int b) {
+        return a*a*b;
+    }
+}
+
 // see section 6 of main()
 auto multiply(int a, double b) {
     return a*b;
@@ -253,5 +260,41 @@ int main() {
     }
 
     // 18. tuples
-    
+    std::tuple<std::string, int, double> person {"Charlie", 28, 1.7};
+
+    //19. function objects - like functors in haskell
+    struct Square {
+        int operator()(int x) const {
+            return x * x;
+        }
+    };
+    Square sqr;
+    std::println("Square of 5: {}", sqr(5));
+
+    //19. type inference
+    decltype(sqr) sameAsSqr;
+    sameAsSqr(25);
+
+    //20. namespaces
+    myNamespace::multi(72, 56);
+
+    //21. enumeration
+    enum class Colour {Red, Green, Blue};
+    Colour col = Colour::Blue;
+
+    if(col == Colour::Green) {
+        // stuff for green
+    }
+
+    switch(col) {
+        case Colour::Red:
+            // what to do if it's red
+        break;
+        case Colour::Blue:
+            // what to do if it's blue
+        break;
+        default:
+            //otherwise
+        break;
+    }
 }
